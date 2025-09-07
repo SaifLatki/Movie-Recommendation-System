@@ -1,7 +1,6 @@
 import React from "react";
 import { Play, TrendingUp, Star, Users } from "lucide-react";
 import moviesData from "../data/movies.json";
-import img from '../../public/static/movie.jpeg';
 
 const Home = () => {
   const featuredMovies = moviesData.slice(0, 6);
@@ -10,18 +9,18 @@ const Home = () => {
     .slice(0, 4);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white dark:bg-gray-950 transition-colors duration-500">
       {/* Hero Section */}
       <section
         className="relative h-[90vh] flex items-center justify-center text-white"
         style={{
-          backgroundImage: `url(${img})`, // place your image in /public/static
+          backgroundImage: "url('/static/movie.jpeg')", // put in public/static
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/70 to-black/50"></div>
 
         <div className="relative z-10 text-center px-6 max-w-3xl">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
@@ -47,43 +46,43 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
           <div className="transition hover:scale-105">
-            <div className="bg-blue-100 w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-5 shadow-md">
-              <TrendingUp className="h-8 w-8 text-blue-600" />
+            <div className="bg-blue-100 dark:bg-blue-900 w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-5 shadow-md">
+              <TrendingUp className="h-8 w-8 text-blue-600 dark:text-blue-300" />
             </div>
-            <h3 className="text-3xl font-bold text-gray-900">10,000+</h3>
-            <p className="text-gray-600">Movies Available</p>
+            <h3 className="text-3xl font-bold text-gray-900 dark:text-white">10,000+</h3>
+            <p className="text-gray-600 dark:text-gray-400">Movies Available</p>
           </div>
           <div className="transition hover:scale-105">
-            <div className="bg-yellow-100 w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-5 shadow-md">
-              <Star className="h-8 w-8 text-yellow-600" />
+            <div className="bg-yellow-100 dark:bg-yellow-900 w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-5 shadow-md">
+              <Star className="h-8 w-8 text-yellow-600 dark:text-yellow-300" />
             </div>
-            <h3 className="text-3xl font-bold text-gray-900">4.8/5</h3>
-            <p className="text-gray-600">Average Rating</p>
+            <h3 className="text-3xl font-bold text-gray-900 dark:text-white">4.8/5</h3>
+            <p className="text-gray-600 dark:text-gray-400">Average Rating</p>
           </div>
           <div className="transition hover:scale-105">
-            <div className="bg-green-100 w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-5 shadow-md">
-              <Users className="h-8 w-8 text-green-600" />
+            <div className="bg-green-100 dark:bg-green-900 w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-5 shadow-md">
+              <Users className="h-8 w-8 text-green-600 dark:text-green-300" />
             </div>
-            <h3 className="text-3xl font-bold text-gray-900">50,000+</h3>
-            <p className="text-gray-600">Active Users</p>
+            <h3 className="text-3xl font-bold text-gray-900 dark:text-white">50,000+</h3>
+            <p className="text-gray-600 dark:text-gray-400">Active Users</p>
           </div>
         </div>
       </section>
 
       {/* Featured Movies */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white dark:bg-gray-950 transition-colors">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
             Featured Movies
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredMovies.map((movie) => (
               <div
                 key={movie.id}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300 group"
+                className="bg-white dark:bg-gray-900 rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300 group"
               >
                 <div className="aspect-[2/3] overflow-hidden">
                   <img
@@ -93,14 +92,16 @@ const Home = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-1">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1">
                     {movie.title}
                   </h3>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">{movie.genre}</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {movie.genre}
+                    </span>
                     <div className="flex items-center space-x-1">
                       <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                      <span className="text-sm font-medium text-gray-700">
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                         {movie.rating}
                       </span>
                     </div>
@@ -113,16 +114,16 @@ const Home = () => {
       </section>
 
       {/* Top Rated Movies */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
             Top Rated Movies
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {topRatedMovies.map((movie, index) => (
               <div
                 key={movie.id}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition duration-300"
+                className="bg-white dark:bg-gray-900 rounded-xl shadow-md overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition duration-300"
               >
                 <div className="relative aspect-[2/3]">
                   <img
@@ -135,14 +136,18 @@ const Home = () => {
                   </span>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-2 line-clamp-1">
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1">
                     {movie.title}
                   </h3>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500">{movie.year}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      {movie.year}
+                    </span>
                     <div className="flex items-center space-x-1">
                       <Star className="h-3 w-3 text-yellow-400 fill-yellow-400" />
-                      <span className="text-xs font-medium">{movie.rating}</span>
+                      <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                        {movie.rating}
+                      </span>
                     </div>
                   </div>
                 </div>

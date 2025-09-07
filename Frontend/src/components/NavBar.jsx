@@ -37,7 +37,7 @@ const NavBar = () => {
                   to={item.path}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                     location.pathname === item.path
-                      ? "bg-blue-600 text-white shadow-md scale-105"
+                      ? "bg-sky-600 text-white shadow-md scale-105"
                       : "text-gray-300 hover:text-white hover:bg-gray-700 hover:scale-105"
                   }`}
                 >
@@ -73,7 +73,7 @@ const NavBar = () => {
                   onClick={() => setMobileOpen(false)}
                   className={`flex items-center space-x-3 px-4 py-2 rounded-md text-base font-medium transition-all duration-200 ${
                     location.pathname === item.path
-                      ? "bg-blue-600 text-white"
+                      ? "bg-sky-600 text-white"
                       : "text-gray-300 hover:text-white hover:bg-gray-700"
                   }`}
                 >
