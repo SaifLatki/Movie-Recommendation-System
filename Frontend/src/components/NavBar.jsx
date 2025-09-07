@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { PiFilmSlateFill } from "react-icons/pi";
-import {  Home, Grid3X3, Heart, Info, Search, Menu, X } from "lucide-react";
+import { Home, Grid3X3, Heart, Info, Search, Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
-const NavBar = ({ currentPage, onPageChange }) => {
+const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation(); // to highlight active link
 
   const navItems = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "genres", label: "Genres", icon: Grid3X3 },
-    { id: "watchlist", label: "Watchlist", icon: Heart },
-    { id: "about", label: "About", icon: Info },
-    { id: "movies", label: "Movies", icon: Search },
+    { path: "/", label: "Home", icon: Home },
+    { path: "/genres", label: "Genres", icon: Grid3X3 },
+    { path: "/watchlist", label: "Watchlist", icon: Heart },
+    { path: "/about", label: "About", icon: Info },
+    { path: "/movies", label: "Movies", icon: Search },
   ];
 
   return (
@@ -30,18 +32,18 @@ const NavBar = ({ currentPage, onPageChange }) => {
             {navItems.map((item) => {
               const Icon = item.icon;
               return (
-                <button
-                  key={item.id}
-                  onClick={() => onPageChange(item.id)}
+                <Link
+                  key={item.path}
+                  to={item.path}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
-                    currentPage === item.id
+                    location.pathname === item.path
                       ? "bg-blue-600 text-white shadow-md scale-105"
                       : "text-gray-300 hover:text-white hover:bg-gray-700 hover:scale-105"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
                   <span>{item.label}</span>
-                </button>
+                </Link>
               );
             })}
           </div>
@@ -65,21 +67,19 @@ const NavBar = ({ currentPage, onPageChange }) => {
             {navItems.map((item) => {
               const Icon = item.icon;
               return (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    onPageChange(item.id);
-                    setMobileOpen(false);
-                  }}
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMobileOpen(false)}
                   className={`flex items-center space-x-3 px-4 py-2 rounded-md text-base font-medium transition-all duration-200 ${
-                    currentPage === item.id
+                    location.pathname === item.path
                       ? "bg-blue-600 text-white"
                       : "text-gray-300 hover:text-white hover:bg-gray-700"
                   }`}
                 >
                   <Icon className="h-5 w-5" />
                   <span>{item.label}</span>
-                </button>
+                </Link>
               );
             })}
           </div>
