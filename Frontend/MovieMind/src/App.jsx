@@ -14,6 +14,15 @@ import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
+import Careers from "./pages/Careers";
+import FAQ from "./pages/FAQ";
+import Blog from "./pages/Blog";
+import Press from "./pages/Press";
+import HelpCenter from "./pages/HelpCenter";
+import Status from "./pages/Status";
+import API from "./pages/Api";
+import DMCA from "./pages/DMCA";
+
 
 export default function App() {
   return (
@@ -33,6 +42,14 @@ export default function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/press" element={<Press />} />
+          <Route path="/help" element={<HelpCenter />} />
+          <Route path="/status" element={<Status />} />
+          <Route path="/api" element={<API />} />
+          <Route path="/dmca" element={<DMCA />} />
 
         </Routes>
         <Footer />

@@ -65,7 +65,7 @@ export default function Footer() {
                 <div className="absolute inset-0 blur-lg bg-purple-500/30 group-hover:bg-purple-400/40 transition-all duration-300" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">
-                CineMatch
+                MovieMind
               </span>
               <span className="px-2 py-0.5 text-xs font-semibold bg-purple-500/20 text-purple-300 rounded-full border border-purple-500/30">
                 AI
@@ -149,8 +149,8 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
           <p className="flex items-center gap-1">
-            © {currentYear} CineMatch AI. Made with{" "}
-            <Heart className="w-4 h-4 fill-red-500 text-red-500 inline animate-pulse" />{" "}
+            © {currentYear} MovieMind AI. Made with{" "}
+            <Heart className="w-4 h-4 fill-pink-950 text-zinc-100 inline animate-pulse" />{" "}
             for movie lovers.
           </p>
 
