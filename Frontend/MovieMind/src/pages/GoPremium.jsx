@@ -46,7 +46,7 @@ export default function GoPremium() {
             Go Premium
           </h1>
           <p className="max-w-xl text-lg md:text-xl text-gray-300 mx-auto mb-6">
-            Unlock the best CineMatch features and get tailored movie experiences, totally ad-free. It's the ultimate upgrade for movie lovers!
+            Unlock the best MovieMind features and get tailored movie experiences, totally ad-free. It's the ultimate upgrade for movie lovers!
           </p>
           <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold bg-yellow-400/10 text-yellow-200 border border-yellow-400/20 mb-6">
             Limited-Time Offer: Save 15% on yearly!

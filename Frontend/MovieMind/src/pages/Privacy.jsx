@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Privacy() {
   return (
-    <section className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-gray-900 py-16 px-4 sm:px-8 flex flex-col items-center">
+    <section className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-gray-900 py-56 px-4 sm:px-8 flex flex-col items-center">
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -19,7 +19,7 @@ export default function Privacy() {
           <span className="font-semibold text-lg text-white">Your Privacy Matters</span>
         </div>
         <p>
-          CineMatch values your privacy, keeping your data secure and never selling any of your information. For questions, contact us any time!
+          MovieMind values your privacy, keeping your data secure and never selling any of your information. For questions, contact us any time!
         </p>
         <h2 className="font-semibold text-yellow-300 mt-4 mb-2">What We Collect</h2>
         <ul className="list-disc list-inside ml-3">

@@ -11,7 +11,7 @@ export default function Status() {
   ];
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-gray-900 py-16 px-4 sm:px-8 flex flex-col items-center">
+    <section className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-gray-900 py-56 px-4 sm:px-8 flex flex-col items-center">
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

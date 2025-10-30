@@ -19,11 +19,11 @@ export default function CookiePolicy() {
           <span className="font-semibold text-lg text-white">Cookies</span>
         </div>
         <p>
-          CineMatch uses cookies to save your settings and improve your experience. Cookies are never used for third-party advertising.
+          MovieMind uses cookies to save your settings and improve your experience. Cookies are never used for third-party advertising.
         </p>
         <ul className="list-disc list-inside ml-3">
           <li>Session cookies remember your login and preferences.</li>
-          <li>Analytics cookies help our team understand how CineMatch is used.</li>
+          <li>Analytics cookies help our team understand how MovieMind is used.</li>
         </ul>
         <p>
           You can always clear cookies in your browser settings to reset preferences.

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Terms() {
   return (
-    <section className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-gray-900 py-16 px-4 sm:px-8 flex flex-col items-center">
+    <section className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-gray-900 py-56 px-4 sm:px-8 flex flex-col items-center">
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -20,7 +20,7 @@ export default function Terms() {
         </div>
         <h2 className="font-semibold text-yellow-300 mt-4 mb-2">Usage</h2>
         <p>
-          CineMatch offers personalized recommendations for personal use. You're responsible for your account and content shared on the site.
+          MovieMind offers personalized recommendations for personal use. You're responsible for your account and content shared on the site.
         </p>
         <h2 className="font-semibold text-yellow-300 mt-4 mb-2">Premium & Payments</h2>
         <p>
@@ -32,7 +32,7 @@ export default function Terms() {
         </p>
         <h2 className="font-semibold text-yellow-300 mt-4 mb-2">Legal</h2>
         <p>
-          All trademarks and content belong to their respective owners; CineMatch does not host or stream movies directly.
+          All trademarks and content belong to their respective owners; MovieMind does not host or stream movies directly.
         </p>
       </div>
     </section>

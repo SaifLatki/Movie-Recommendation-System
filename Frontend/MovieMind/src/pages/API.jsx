@@ -25,9 +25,9 @@ export default function API() {
             <Code2 className="w-7 h-7 text-yellow-400" />
           </div>
           <p className="text-gray-300 mb-2">
-            Integrate CineMatch movie recommendations into your app using our RESTful API!
+            Integrate MovieMind movie recommendations into your app using our RESTful API!
           </p>
-          <p className="text-yellow-400">Contact <span className="text-purple-400">api@cinematch.ai</span> for access.</p>
+          <p className="text-yellow-400">Contact <span className="text-purple-400">api@moviemind.ai</span> for access.</p>
         </motion.div>
       </div>
     </section>

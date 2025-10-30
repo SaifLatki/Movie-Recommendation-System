@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function HelpCenter() {
   return (
-    <section className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-gray-900 py-16 px-4 sm:px-8 flex flex-col items-center">
+    <section className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-gray-900 py-56 px-4 sm:px-8 flex flex-col items-center">
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -24,7 +24,7 @@ export default function HelpCenter() {
             <LifeBuoy className="w-5 h-5" /> Need Help?
           </h2>
           <p className="text-gray-300">
-            Find answers to common questions in our <span className="text-yellow-400 font-semibold">FAQ</span> or contact support at <span className="text-purple-400">support@cinematch.ai</span>.
+            Find answers to common questions in our <span className="text-yellow-400 font-semibold">FAQ</span> or contact support at <span className="text-purple-400">support@moviemind.ai</span>.
           </p>
         </motion.div>
         <div className="flex justify-center gap-8 mt-4">

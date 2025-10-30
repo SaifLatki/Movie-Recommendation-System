@@ -20,7 +20,7 @@ export default function About() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-gray-300 text-lg"
         >
-          CineMatch is powered by cutting-edge AI technology to help movie fans everywhere discover, track, and enjoy their next favorite films. We believe in making every movie night a memorable experience!
+          MovieMind is powered by cutting-edge AI technology to help movie fans everywhere discover, track, and enjoy their next favorite films. We believe in making every movie night a memorable experience!
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 40 }}

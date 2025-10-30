@@ -11,7 +11,7 @@ const posts = [
   {
     title: "Top 10 Hidden Film Gems This Month",
     date: "September 2025",
-    excerpt: "Our CineMatch team shares undiscovered movies for every genre lover...",
+    excerpt: "Our MovieMind team shares undiscovered movies for every genre lover...",
   },
 ];
 

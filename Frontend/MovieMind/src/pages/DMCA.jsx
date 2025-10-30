@@ -19,7 +19,7 @@ export default function DMCA() {
           <span className="font-semibold text-lg text-white">Content Protection</span>
         </div>
         <p>
-          CineMatch does not host or provide streaming content. If you believe your copyright has been infringed, contact us at <span className="text-purple-400">dmca@cinematch.ai</span> with details.
+          MovieMind does not host or provide streaming content. If you believe your copyright has been infringed, contact us at <span className="text-purple-400">dmca@moviemind.ai</span> with details.
         </p>
         <p>
           Any reported issues will be investigated and content removed as warranted.
