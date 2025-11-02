@@ -8,8 +8,9 @@ export default function Discover() {
   const [activeGenre, setActiveGenre] = useState("All");
 
   // Auto-generate genre list
-  const genres = ["All", ...new Set(movies.flatMap((m) => m.genres || []))];
-
+  const allGenres = ["All", ...new Set(movies.flatMap((m) => m.genres || []))];
+  const moviesGenres = ["Movies", ...new Set(movies.releases.flatMap((m) => m.tv_movie || []))];
+  const tvGenres = ["TV Shows", ...new Set(movies.releases.flatMap((m) => m.tv_series || []))];
   // Filter logic
   const filtered = movies.filter((movie) => {
     const matchesSearch = movie.title.toLowerCase().includes(search.toLowerCase());
@@ -47,7 +48,35 @@ export default function Discover() {
 
         {/* Genre Filter Chips */}
         <div className="flex gap-3 overflow-x-auto pb-2 mb-8">
-          {genres.map((genre) => (
+          {allGenres.map((genre) => (
+            <button
+              key={genre}
+              onClick={() => setActiveGenre()}
+              className={`px-4 py-1.5 text-sm rounded-full border transition whitespace-nowrap
+                ${
+                  activeGenre === genre
+                    ? "bg-purple-600 border-purple-400 text-white"
+                    : "bg-white/5 border-white/20 text-gray-300 hover:bg-white/10"
+                }`}
+            >
+              {genre}
+            </button>
+          ))}
+          {moviesGenres.map((genre) => (
+            <button
+              key={genre}
+              onClick={() => setActiveGenre(genre)}
+              className={`px-4 py-1.5 text-sm rounded-full border transition whitespace-nowrap
+                ${
+                  activeGenre === genre
+                    ? "bg-purple-600 border-purple-400 text-white"
+                    : "bg-white/5 border-white/20 text-gray-300 hover:bg-white/10"
+                }`}
+            >
+              {genre}
+            </button>
+          ))}
+          {tvGenres.map((genre) => (
             <button
               key={genre}
               onClick={() => setActiveGenre(genre)}

@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Play, Info, Volume2, VolumeX, Star } from "lucide-react";
 
 export default function HeroSection({ featured }) {
   const [muted, setMuted] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
-
-  // Preload image for better performance
-  useEffect(() => {
-    if (featured?.poster) {
-      const img = new Image();
-      img.src = featured.poster;
-      img.onload = () => setImageLoaded(true);
-    }
-  }, [featured?.poster]);
+  const [imageSrc, setImageSrc] = useState(null);
 
   if (!featured) {
     return (
@@ -24,31 +16,63 @@ export default function HeroSection({ featured }) {
     );
   }
 
+  // ✅ Fetch blob image for URLs that download instead of display
+  useEffect(() => {
+    if (!featured.poster_url) return;
+
+    async function loadImage() {
+      try {
+        const response = await fetch(featured.poster_url, {
+          method: "GET",
+          mode: "cors",
+        });
+        const blob = await response.blob();
+        const objectUrl = URL.createObjectURL(blob);
+        setImageSrc(objectUrl);
+      } catch (err) {
+        console.error("Error loading image:", err);
+        setImageSrc(null);
+      }
+    }
+
+    loadImage();
+
+    return () => {
+      if (imageSrc) URL.revokeObjectURL(imageSrc);
+    };
+  }, [featured.poster_url]);
+
   return (
     <section
       className="relative h-[70vh] md:h-screen overflow-hidden"
       aria-label="Featured movie"
     >
-      {/* Background Image with Parallax Effect */}
+      {/* ✅ Use blob image instead of direct URL */}
       <motion.div
         initial={{ scale: 1.1, opacity: 0 }}
         animate={{ scale: 1, opacity: imageLoaded ? 1 : 0 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
         className="absolute inset-0"
       >
-        <img
-          src={featured.poster}
-          alt={`${featured.title} poster`}
-          className="w-full h-full object-cover object-center"
-          loading="eager"
-        />
-        {/* Multi-layer Gradient Overlay */}
+        {imageSrc && (
+          <div className="w-full h-full flex justify-center items-center">
+          <img
+            src={imageSrc}
+            alt={`${featured.title} poster`}
+            className=" h-full w-1/2 "
+            onLoad={() => setImageLoaded(true)}
+            loading="eager"
+          />
+          </div>
+        )}
+
+        {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
       </motion.div>
 
-      {/* Content Container */}
+      {/* Content */}
       <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-center md:justify-end h-full pb-12 md:pb-24">
           <motion.div
@@ -57,7 +81,6 @@ export default function HeroSection({ featured }) {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="max-w-2xl space-y-4 md:space-y-6"
           >
-            {/* Title */}
             <motion.h1
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -67,7 +90,6 @@ export default function HeroSection({ featured }) {
               {featured.title}
             </motion.h1>
 
-            {/* Metadata */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -86,7 +108,6 @@ export default function HeroSection({ featured }) {
               </div>
             </motion.div>
 
-            {/* Description */}
             {featured.description && (
               <motion.p
                 initial={{ opacity: 0 }}
@@ -99,7 +120,6 @@ export default function HeroSection({ featured }) {
               </motion.p>
             )}
 
-            {/* Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -122,7 +142,6 @@ export default function HeroSection({ featured }) {
                 <span>More Info</span>
               </Link>
 
-              {/* Mute Toggle (if video background) */}
               <button
                 onClick={() => setMuted(!muted)}
                 className="p-3 md:p-4 bg-gray-800/60 backdrop-blur-sm text-white rounded-xl border border-white/20 hover:bg-gray-700/60 hover:border-white/40 transition-all duration-300 shadow-xl hover:scale-105 active:scale-95"

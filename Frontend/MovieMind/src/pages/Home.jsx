@@ -26,7 +26,7 @@ export default function Home() {
     <main className="pt-16 bg-black text-white min-h-screen overflow-hidden">
 
       {/* Featured Movie Hero Section */}
-      <HeroSection featured={movies[0]} />
+      <HeroSection featured={movies[9]} />
 
       {/* Recommended Section */}
       <motion.section

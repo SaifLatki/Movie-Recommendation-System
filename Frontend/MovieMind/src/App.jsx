@@ -22,6 +22,7 @@ import HelpCenter from "./pages/HelpCenter";
 import Status from "./pages/Status";
 import API from "./pages/Api";
 import DMCA from "./pages/DMCA";
+import NotFound from "./pages/404";
 
 
 export default function App() {
@@ -50,7 +51,7 @@ export default function App() {
           <Route path="/status" element={<Status />} />
           <Route path="/api" element={<API />} />
           <Route path="/dmca" element={<DMCA />} />
-
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </div>

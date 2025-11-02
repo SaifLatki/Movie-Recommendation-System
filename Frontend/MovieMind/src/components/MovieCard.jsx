@@ -1,12 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Play, Heart, Star, Info } from "lucide-react";
+import { Play, Heart, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function MovieCard({ movie, index = 0 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null);
+
+  // ✅ Option 3: Fetch image → convert to Blob → render safely
+  useEffect(() => {
+    if (!movie.poster_url) return;
+
+    async function loadImage() {
+      try {
+        const response = await fetch(movie.poster_url, {
+          method: "GET",
+          mode: "cors",
+        });
+        const blob = await response.blob();
+        const objectUrl = URL.createObjectURL(blob);
+        setImageSrc(objectUrl);
+      } catch (err) {
+        console.error("Error loading image:", err);
+        setImageSrc(null);
+      }
+    }
+
+    loadImage();
+
+    // Cleanup blob URL when component unmounts
+    return () => {
+      if (imageSrc) URL.revokeObjectURL(imageSrc);
+    };
+  }, [movie.poster_url]);
 
   const handleFavoriteClick = (e) => {
     e.preventDefault();
@@ -36,32 +64,34 @@ export default function MovieCard({ movie, index = 0 }) {
           )}
 
           {/* Movie Poster */}
-          <motion.img
-            src={movie.poster}
-            alt={`${movie.title} poster`}
-            className={`w-full h-full object-cover transition-all duration-500 ${
-              imageLoaded ? "opacity-100" : "opacity-0"
-            }`}
-            onLoad={() => setImageLoaded(true)}
-            animate={{
-              scale: isHovered ? 1.1 : 1,
-            }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-          />
+          {imageSrc && (
+            <motion.img
+              src={imageSrc}
+              alt={`${movie.title} poster`}
+              className={`w-full h-full object-cover transition-all duration-500 ${
+                imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              onLoad={() => setImageLoaded(true)}
+              animate={{
+                scale: isHovered ? 1.1 : 1,
+              }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            />
+          )}
 
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
-          {/* Rating Badge */}
+          {/* Release Date Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
             className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 bg-black/80 backdrop-blur-sm rounded-lg shadow-lg"
           >
-            <Star className="w-3 h-3 fill-yellow-500 text-yellow-500" />
+            <Calendar className="w-3 h-3 fill-yellow-500 text-yellow-500" />
             <span className="text-xs font-bold text-white">
-              {movie.rating || "N/A"}
+              {movie.source_release_date || "N/A"}
             </span>
           </motion.div>
 
@@ -96,10 +126,7 @@ export default function MovieCard({ movie, index = 0 }) {
               className="pointer-events-auto"
             >
               <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  // Add play functionality
-                }}
+                onClick={(e) => e.preventDefault()}
                 className="p-4 bg-white/90 hover:bg-white text-black rounded-full shadow-2xl hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
                 aria-label={`Play ${movie.title}`}
               >
@@ -116,14 +143,9 @@ export default function MovieCard({ movie, index = 0 }) {
           </h3>
 
           <div className="flex items-center justify-between gap-2 text-xs sm:text-sm text-gray-400">
-            <span className="flex items-center gap-1">
-              <span className="w-1 h-1 bg-purple-500 rounded-full" />
-              {movie.genre}
-            </span>
-            <span>{movie.year}</span>
+            <span className="flex items-center gap-1">{movie.type}</span>
           </div>
 
-          {/* Progress Bar (if watching) */}
           {movie.progress && (
             <div className="w-full h-1 bg-gray-700 rounded-full overflow-hidden">
               <motion.div
