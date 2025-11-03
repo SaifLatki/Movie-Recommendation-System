@@ -7,12 +7,32 @@ import {
   Mail,
   Heart,
   Sparkles,
+  Film,
+  Tv,
 } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  // You can later make this dynamic from backend
+  const genres = [
+    "Action",
+    "Comedy",
+    "Drama",
+    "Horror",
+    "Sci-Fi",
+    "Romance",
+  ];
+
   const footerLinks = {
+    browse: [
+      { label: "Movies", icon: Film, to: "/movies" },
+      { label: "TV Shows", icon: Tv, to: "/tv" },
+    ],
+    genres: genres.map((g) => ({
+      label: g,
+      to: `/genre/${g.toLowerCase()}`,
+    })),
     product: [
       { label: "Features", to: "/features" },
       { label: "Pricing", to: "/pricing" },
@@ -31,12 +51,6 @@ export default function Footer() {
       { label: "Cookie Policy", to: "/cookies" },
       { label: "DMCA", to: "/dmca" },
     ],
-    support: [
-      { label: "Help Center", to: "/help" },
-      { label: "Contact", to: "/contact" },
-      { label: "Status", to: "/status" },
-      { label: "API", to: "/api" },
-    ],
   };
 
   const socialLinks = [
@@ -47,17 +61,12 @@ export default function Footer() {
   ];
 
   return (
-    <footer
-      className="relative bg-gradient-to-b from-black via-gray-900 to-black border-t border-white/5"
-      role="contentinfo"
-    >
-      {/* Decorative Top Border */}
+    <footer className="relative bg-gradient-to-b from-black via-gray-900 to-black border-t border-white/5">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        {/* Main Footer Content */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 md:gap-12 mb-12">
-          {/* Brand Column */}
+          {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
             <Link to="/" className="inline-flex items-center gap-2 group mb-4">
               <div className="relative">
@@ -74,43 +83,40 @@ export default function Footer() {
 
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Your AI-powered movie recommendation platform. Discover your next
-              favorite film with personalized suggestions.
+              favorite film or series with personalized suggestions.
             </p>
 
             {/* Social Links */}
             <div className="flex items-center gap-3">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-gray-800/50 hover:bg-purple-600/20 text-gray-400 hover:text-purple-400 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    aria-label={social.label}
-                  >
-                    <Icon className="w-5 h-5" />
-                  </a>
-                );
-              })}
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-gray-800/50 hover:bg-purple-600/20 text-gray-400 hover:text-purple-400 rounded-lg transition-all duration-300 hover:scale-110 focus:ring-2 focus:ring-purple-500"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Links Columns */}
+          {/* Browse + Genre + Other Columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
               <h3 className="text-white font-semibold mb-4 capitalize">
                 {category}
               </h3>
-              <ul className="space-y-3" role="list">
-                {links.map((link) => (
-                  <li key={link.to}>
+              <ul className="space-y-3">
+                {links.map(({ label, to, icon: Icon }) => (
+                  <li key={to}>
                     <Link
-                      to={link.to}
-                      className="text-gray-400 hover:text-white text-sm transition-colors duration-300 inline-block hover:translate-x-1 transform"
+                      to={to}
+                      className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors duration-300 hover:translate-x-1"
                     >
-                      {link.label}
+                      {Icon && <Icon className="w-4 h-4 text-purple-400" />}
+                      {label}
                     </Link>
                   </li>
                 ))}
@@ -119,7 +125,7 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Newsletter Section */}
+        {/* Newsletter */}
         <div className="border-t border-white/5 pt-8 pb-8">
           <div className="max-w-md mx-auto text-center md:text-left md:mx-0">
             <h3 className="text-white font-semibold mb-2 flex items-center justify-center md:justify-start gap-2">
@@ -133,12 +139,11 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-2 bg-gray-800/50 border border-white/10 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                aria-label="Email address"
+                className="flex-1 px-4 py-2 bg-gray-800/50 border border-white/10 text-white rounded-lg focus:ring-2 focus:ring-purple-500"
               />
               <button
                 type="submit"
-                className="px-6 py-2 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="px-6 py-2 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105"
               >
                 Subscribe
               </button>
@@ -155,22 +160,13 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-6">
-            <Link
-              to="/privacy"
-              className="hover:text-white transition-colors duration-300"
-            >
+            <Link to="/privacy" className="hover:text-white">
               Privacy
             </Link>
-            <Link
-              to="/terms"
-              className="hover:text-white transition-colors duration-300"
-            >
+            <Link to="/terms" className="hover:text-white">
               Terms
             </Link>
-            <Link
-              to="/cookies"
-              className="hover:text-white transition-colors duration-300"
-            >
+            <Link to="/cookies" className="hover:text-white">
               Cookies
             </Link>
           </div>

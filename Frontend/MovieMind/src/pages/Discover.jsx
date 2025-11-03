@@ -7,28 +7,40 @@ export default function Discover() {
   const [search, setSearch] = useState("");
   const [activeGenre, setActiveGenre] = useState("All");
 
-  // Auto-generate genre list
+  // ✅ Safely extract genres from all items
   const allGenres = ["All", ...new Set(movies.flatMap((m) => m.genres || []))];
-  const moviesGenres = ["Movies", ...new Set(movies.releases.flatMap((m) => m.tv_movie || []))];
-  const tvGenres = ["TV Shows", ...new Set(movies.releases.flatMap((m) => m.tv_series || []))];
-  // Filter logic
+
+  // ✅ Category buttons
+  const categoryButtons = ["Movies", "TV Shows"];
+
+  // ✅ Filtering logic
   const filtered = movies.filter((movie) => {
-    const matchesSearch = movie.title.toLowerCase().includes(search.toLowerCase());
-    const matchesGenre = activeGenre === "All" || movie.genres?.includes(activeGenre);
-    return matchesSearch && matchesGenre;
+    const matchesSearch = movie.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    const matchesCategory =
+      activeGenre === "All"
+        ? true
+        : activeGenre === "Movies"
+        ? movie.type === "movie"
+        : activeGenre === "TV Shows"
+        ? movie.type === "tv_series"
+        : movie.genres?.includes(activeGenre);
+
+    return matchesSearch && matchesCategory;
   });
 
   return (
     <main className="pt-24 bg-gradient-to-b from-black via-gray-900 to-black text-white min-h-screen">
       <div className="max-w-7xl mx-auto px-6 py-12">
-
-        {/* Page Title */}
+        {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl font-bold mb-6"
         >
-          Discover Movies 🎬
+          Discover Movies & Series 🎬
         </motion.h2>
 
         {/* Search Bar */}
@@ -46,25 +58,12 @@ export default function Discover() {
           />
         </motion.div>
 
-        {/* Genre Filter Chips */}
+        {/* Filter Buttons */}
         <div className="flex gap-3 overflow-x-auto pb-2 mb-8">
+          {/* All + Genre Buttons */}
           {allGenres.map((genre) => (
             <button
               key={genre}
-              onClick={() => setActiveGenre()}
-              className={`px-4 py-1.5 text-sm rounded-full border transition whitespace-nowrap
-                ${
-                  activeGenre === genre
-                    ? "bg-purple-600 border-purple-400 text-white"
-                    : "bg-white/5 border-white/20 text-gray-300 hover:bg-white/10"
-                }`}
-            >
-              {genre}
-            </button>
-          ))}
-          {moviesGenres.map((genre) => (
-            <button
-              key={genre}
               onClick={() => setActiveGenre(genre)}
               className={`px-4 py-1.5 text-sm rounded-full border transition whitespace-nowrap
                 ${
@@ -76,28 +75,34 @@ export default function Discover() {
               {genre}
             </button>
           ))}
-          {tvGenres.map((genre) => (
+
+          {/* Movie / TV Category Buttons */}
+          {categoryButtons.map((cat) => (
             <button
-              key={genre}
-              onClick={() => setActiveGenre(genre)}
+              key={cat}
+              onClick={() => setActiveGenre(cat)}
               className={`px-4 py-1.5 text-sm rounded-full border transition whitespace-nowrap
                 ${
-                  activeGenre === genre
+                  activeGenre === cat
                     ? "bg-purple-600 border-purple-400 text-white"
                     : "bg-white/5 border-white/20 text-gray-300 hover:bg-white/10"
                 }`}
             >
-              {genre}
+              {cat}
             </button>
           ))}
         </div>
 
         {/* Results Count */}
         <p className="text-gray-400 mb-4">
-          Found <span className="text-purple-400 font-semibold">{filtered.length}</span> result(s)
+          Found{" "}
+          <span className="text-purple-400 font-semibold">
+            {filtered.length}
+          </span>{" "}
+          result(s)
         </p>
 
-        {/* Results Grid */}
+        {/* Movies Grid */}
         <RecommendationGrid movies={filtered} />
       </div>
     </main>
