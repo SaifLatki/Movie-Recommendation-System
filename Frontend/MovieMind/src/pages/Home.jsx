@@ -13,19 +13,27 @@ export default function Home() {
   useEffect(() => {
     const watched = movies.filter((m) => user.watched.includes(m.id));
 
-    // 🔮 Smarter recommendations: similar genres & rating proximity
-    const rec = movies.filter(
-      (m) =>
-        !user.watched.includes(m.id) &&
-        watched.some(
-          (w) =>
-            (Array.isArray(w.genres) &&
-              w.genres.some((g) => m.genres?.includes(g))) ||
-            w.rating >= m.rating - 0.5
-        )
-    );
+    // ✅ Safer recommendation logic
+    const rec = movies.filter((m) => {
+      if (user.watched.includes(m.id)) return false;
 
-    setRecommended(rec);
+      return watched.some((w) => {
+        const hasSimilarGenre =
+          Array.isArray(w.genres) &&
+          Array.isArray(m.genres) &&
+          w.genres.some((g) => m.genres.includes(g));
+
+        const similarRating =
+          typeof w.rating === "number" &&
+          typeof m.rating === "number" &&
+          Math.abs(w.rating - m.rating) <= 0.5;
+
+        return hasSimilarGenre || similarRating;
+      });
+    });
+
+    // ✅ Fallback: if no match found, just show top-rated
+    setRecommended(rec.length > 0 ? rec : movies.slice(0, 6));
   }, []);
 
   return (

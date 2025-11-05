@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, Sparkles } from "lucide-react";
+import { RiMovieAiLine } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -74,7 +75,7 @@ export default function Navbar() {
               transition={{ duration: 0.5 }}
               className="relative"
             >
-              <Sparkles className="w-7 h-7 text-purple-400 group-hover:text-purple-300 transition-colors duration-300" />
+              <RiMovieAiLine className="w-7 h-7 text-purple-400 group-hover:text-purple-300 transition-colors duration-300" />
               <div className="absolute inset-0 blur-md bg-purple-500/30 group-hover:bg-purple-400/40 transition-all duration-300 rounded-full" />
             </motion.div>
             <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent tracking-tight">

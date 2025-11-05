@@ -10,6 +10,7 @@ import {
   Film,
   Tv,
 } from "lucide-react";
+import { RiMovieAiLine } from "react-icons/ri";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -70,7 +71,7 @@ export default function Footer() {
           <div className="col-span-2 lg:col-span-2">
             <Link to="/" className="inline-flex items-center gap-2 group mb-4">
               <div className="relative">
-                <Sparkles className="w-8 h-8 text-purple-500 group-hover:text-purple-400 transition-colors duration-300" />
+                <RiMovieAiLine className="w-8 h-8 text-purple-500 group-hover:text-purple-400 transition-colors duration-300" />
                 <div className="absolute inset-0 blur-lg bg-purple-500/30 group-hover:bg-purple-400/40 transition-all duration-300" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">
